@@ -15,4 +15,7 @@ data class GetCarsResponseItem(
     val price: Int,
     val transmission: String,
     val year: Int
-)
+){
+    val multipleImages: List<String>
+        get() = listOf(image, image, image)
+}

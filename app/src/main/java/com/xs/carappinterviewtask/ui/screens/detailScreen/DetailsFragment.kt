@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.xs.carappinterviewtask.R
 import com.xs.carappinterviewtask.data.model.responses.GetCarsResponseItem
 import com.xs.carappinterviewtask.databinding.FragmentDetailsBinding
+import com.xs.carappinterviewtask.ui.screens.homeScreen.adapter.HorizontalImageAdapter
 import com.xs.carappinterviewtask.ui.viewmodels.SharedViewModel
 import com.xs.carappinterviewtask.utils.base.BaseFragment
 import com.xs.carappinterviewtask.utils.objects.ExtensionUtils.load
@@ -19,6 +20,7 @@ import es.dmoral.toasty.Toasty
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(true) {
     private val viewModel:SharedViewModel by activityViewModels()
+
     override fun layoutResource(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,7 +51,8 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(true) {
 
     fun bindData(car: GetCarsResponseItem){
         with(binding){
-            carImage.load(car.image)
+            val adapter = HorizontalImageAdapter(car.multipleImages)
+            carImage.adapter = adapter
             makeTv.text = car.make
             modelTv.text = car.model
             yearTv.text = car.year.toString()

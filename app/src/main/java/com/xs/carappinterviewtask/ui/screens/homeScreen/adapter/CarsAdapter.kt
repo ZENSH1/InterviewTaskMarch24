@@ -39,7 +39,8 @@ class CarsAdapter(
 
         fun bind(car: GetCarsResponseItem) {
             with(binding) {
-                carImage.load(car.image)
+                val imageAdapter = HorizontalImageAdapter(car.multipleImages)
+                carImage.adapter = imageAdapter
                 makeTv.text = car.make
                 modelTv.text = car.model
                 root.setOnClickListener {
