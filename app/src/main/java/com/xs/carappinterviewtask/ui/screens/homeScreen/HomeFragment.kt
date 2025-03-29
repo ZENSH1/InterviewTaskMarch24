@@ -25,6 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(true) {
     private val viewModel: SharedViewModel by activityViewModels()
     private val adapter by lazy {
         CarsAdapter(
+            globalContext,
             mutableListOf(),
             { item, layoutBinding ->
                 viewModel.selectedItem = item
@@ -54,6 +55,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(true) {
         binding.carsRv.adapter = adapter
         binding.searchEt.addTextChangedListener {
             adapter.filter(it.toString())
+        }
+        binding.logo.setOnClickListener {
+            adapter.showFav = !adapter.showFav
+            binding.logo.setImageResource(if (adapter.showFav) R.drawable.baseline_heart_broken_24 else R.drawable.baseline_hourglass_empty_24)
+            adapter.filter(adapter.searchQuery)
         }
     }
 

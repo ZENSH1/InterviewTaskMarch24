@@ -22,9 +22,14 @@ class SharedViewModel @Inject constructor(
     private val _carsflow = MutableStateFlow<NetworkResult<GetCarsResponse>>(NetworkResult.Idle())
     val carsflow = _carsflow.asStateFlow()
 
+    var carsList = mutableListOf<GetCarsResponseItem>()
+
     fun getCars(){
         viewModelScope.launch {
             carsRepository.getCars().collectLatest{
+                if (it is NetworkResult.Success){
+                    carsList = it.result!!
+                }
                 _carsflow.value = it
             }
 

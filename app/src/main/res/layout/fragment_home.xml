@@ -53,6 +53,8 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cars_rv"
         android:layout_width="0dp"
